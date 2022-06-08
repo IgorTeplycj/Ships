@@ -7,14 +7,12 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-	  <Compile Remove="Model\**" />
-	  <EmbeddedResource Remove="Model\**" />
-	  <None Remove="Model\**" />
+	  <ProjectReference Include="..\AdapterGenerator\AdapterGenerator.csproj" OutputItemType="Analyzer" ReferenceOutputAssembly="false" />
+	  <ProjectReference Include="..\Message\EndPointMessage.csproj" />
 	</ItemGroup>
 
 	<ItemGroup>
-	  <ProjectReference Include="..\AdapterGenerator\AdapterGenerator.csproj" OutputItemType="Analyzer" ReferenceOutputAssembly="false" />
-	  <ProjectReference Include="..\Message\EndPointMessage.csproj" />
+	  <Folder Include="Model\" />
 	</ItemGroup>
 
 </Project>

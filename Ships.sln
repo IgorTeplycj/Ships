@@ -5,13 +5,13 @@ VisualStudioVersion = 16.0.31515.178
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ships", "HM2\Ships.csproj", "{80CE1B30-24DD-416F-A48B-0C6D18775B96}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HM2.Tests", "HM2.Tests\HM2.Tests.csproj", "{76C6ECA9-9018-4293-9265-90726B5A4133}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ships.Tests", "HM2.Tests\Ships.Tests.csproj", "{76C6ECA9-9018-4293-9265-90726B5A4133}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AdapterGenerator", "AdapterGenerator\AdapterGenerator.csproj", "{F9AB859C-8FBE-48F8-950A-87D131C16A30}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HM2.Queue.Tests", "HM2.Queue.Tests\HM2.Queue.Tests.csproj", "{4366C84C-0425-4178-B677-7D868DC05758}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ships.Queue.Tests", "HM2.Queue.Tests\Ships.Queue.Tests.csproj", "{4366C84C-0425-4178-B677-7D868DC05758}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HM2.Server.Tests", "HM2.Server.Tests\HM2.Server.Tests.csproj", "{AEB9F6EA-1404-44A7-92C2-C79B929504BB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ships.Server.Tests", "HM2.Server.Tests\Ships.Server.Tests.csproj", "{AEB9F6EA-1404-44A7-92C2-C79B929504BB}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EndPointMessage", "Message\EndPointMessage.csproj", "{82EE8E7D-2DDD-44EF-B27E-C0FB522FA081}"
 EndProject
