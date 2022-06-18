@@ -23,7 +23,7 @@ namespace HM2.Model.Fields.Commands
             this.squareY = squareY;
             this.quares = quares;
 
-            discrete = IoC<double>.Resolve("discrete");
+            discrete = 0;
         }
         public void Execute()
         {

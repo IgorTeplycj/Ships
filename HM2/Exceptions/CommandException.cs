@@ -10,4 +10,11 @@ namespace HM2.Exceptions
     {
 
     }
+    public class CollisionCommandException : Exception
+    {
+        public CollisionCommandException(string message) : base(message)
+        {
+
+        }
+    }
 }
