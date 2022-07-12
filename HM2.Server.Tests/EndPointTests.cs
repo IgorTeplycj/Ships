@@ -63,29 +63,29 @@ namespace HM2.Server.Tests
         //[Test]
         public void MoveObjectByServer()
         {
-            //Выбираем игровой объект под номером 3 из игры номер 1. Им и будем управлять в игре.
-            UObject obj = IoC<UObject>.Resolve($"game 1 object 3");
-            Vector vector = new Vector();
-            vector.Shift = new Coordinats { X = 5.0, Y = 7.0 };
+            ////Выбираем игровой объект под номером 3 из игры номер 1. Им и будем управлять в игре.
+            //UObject obj = IoC<UObject>.Resolve($"game 1 object 3");
+            //Vector vector = new Vector();
+            //vector.Shift = new Coordinats { X = 5.0, Y = 7.0 };
 
-            //Формируем сообщение для сервера
-            Message message = new Message("1", "3", "Move line", JsonSerializer.Serialize<Vector>(vector));
-            //Сериализуем сообщение в строку
-            StringBuilder serializedMessage = new StringBuilder();
-            new SerializeMessageCommands(message, serializedMessage).Execute();
+            ////Формируем сообщение для сервера
+            //Message message = new Message("1", "3", "Move line", JsonSerializer.Serialize<Vector>(vector));
+            ////Сериализуем сообщение в строку
+            //StringBuilder serializedMessage = new StringBuilder();
+            //new SerializeMessageCommands(message, serializedMessage).Execute();
 
-            //Проверяем, что объект не двигался
-            Assert.AreEqual(obj.CurrentVector.PositionNow.X, 0.0);
-            Assert.AreEqual(obj.CurrentVector.PositionNow.Y, 0.0);
+            ////Проверяем, что объект не двигался
+            //Assert.AreEqual(obj.CurrentVector.PositionNow.X, 0.0);
+            //Assert.AreEqual(obj.CurrentVector.PositionNow.Y, 0.0);
 
-            //отправляем сообщение серверу 
-            CreateClientAndSendMessage(serializedMessage.ToString());
-            //Немножечко ждем
-            Thread.Sleep(200);
+            ////отправляем сообщение серверу 
+            //CreateClientAndSendMessage(serializedMessage.ToString());
+            ////Немножечко ждем
+            //Thread.Sleep(200);
 
-            //Проверяем что объект изменил свое положение
-            Assert.AreEqual(obj.CurrentVector.PositionNow.X, 5.0);
-            Assert.AreEqual(obj.CurrentVector.PositionNow.Y, 7.0);
+            ////Проверяем что объект изменил свое положение
+            //Assert.AreEqual(obj.CurrentVector.PositionNow.X, 5.0);
+            //Assert.AreEqual(obj.CurrentVector.PositionNow.Y, 7.0);
         }
 
 
