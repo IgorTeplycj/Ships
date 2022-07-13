@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Ships.Interpret.Interfaces
 {
-    interface IInterpret
+    public interface IInterpret
     {
         void Interpret();
     }

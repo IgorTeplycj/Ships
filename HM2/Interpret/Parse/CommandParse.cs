@@ -1,4 +1,5 @@
 ﻿using HM2.GameSolve.Interfaces;
+using HM2.GameSolve.Structures;
 using HM2.IoCs;
 using HM2.MovableObject;
 using Ships.Interpret.Interfaces;
@@ -10,12 +11,11 @@ using System.Threading.Tasks;
 
 namespace Ships.Interpret.Parse
 {
-
-    public class GameObject : IInterpret
+    public class CommandParse : IInterpret
     {
-        const string term = "id";
+        const string term = "action";
         string order;
-        public GameObject(string order)
+        public CommandParse(string order)
         {
             this.order = order;
         }
@@ -23,15 +23,15 @@ namespace Ships.Interpret.Parse
         {
             if (!order.Contains(term))
                 return;
-            order = order.Replace(Environment.NewLine, "");
+
             var start = order.IndexOf(term) + term.Length;
+            order = order.Replace(Environment.NewLine, "").Substring(start);
             var lengh = order.IndexOf(',');
+            string action = order.Remove(lengh).Trim().Trim(':').Trim(',').Trim();
 
-            string id = order.Substring(start, lengh).Trim().Trim(':').Trim(',').Trim();
+            var orderCommand = IoC<Func<IMovable, string, ICommand>>.Resolve(action);
 
-            IMovable orderUbject = IoC<IMovable>.Resolve(id);
-            IoC<IMovable>.Resolve("Registration", "orderUObject", orderUbject); 
+            IoC<Func<IMovable, string, ICommand>>.Resolve("Registration", "orderCommand", orderCommand);
         }
     }
 }
-
