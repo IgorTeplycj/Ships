@@ -51,7 +51,7 @@ namespace HM2.Queue.Tests
             Assert.AreEqual(queueCommand.state.Handle(), StateEnum.Normal); //проверяем что состояние очереди после хапуска Normal
             Thread.Sleep(20); //приблизительное время выполнения двух команд заглушек
             queueCommand.PushCommand(new ControlCommand(queueCommand.HardStop)); //Жесткий стоп очереди
-            Thread.Sleep(60);
+            Thread.Sleep(80);
 
             Assert.IsTrue(command1.CommandIsComplited());
             Assert.IsTrue(command2.CommandIsComplited());
