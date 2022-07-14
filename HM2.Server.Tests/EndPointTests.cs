@@ -42,7 +42,7 @@ namespace HM2.Server.Tests
             //создаем три игры по 10 игровых объектов в каждой
             game.Create(3, 10);
         }
-        [SetUp]
+       [SetUp]
         public void CreateQueueAndRun()
         {
             //создание и регистрация очереди
@@ -81,7 +81,7 @@ namespace HM2.Server.Tests
             //отправляем сообщение серверу 
             CreateClientAndSendMessage(serializedMessage.ToString());
             //Немножечко ждем
-            Thread.Sleep(200);
+            Thread.Sleep(300);
 
             //Проверяем что объект изменил свое положение
             Assert.AreEqual(obj.CurrentVector.PositionNow.X, 5.0);

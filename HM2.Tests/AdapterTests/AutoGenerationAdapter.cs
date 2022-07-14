@@ -40,6 +40,18 @@ namespace HM2.Tests.AdapterTests
             };
             IoC<Func<UObject, Vector, Vector>>.Resolve("IoC.Registration", "setPosition", setVect);
 
+            //Регистрация зависимости - метод разворота объекта
+            Func<UObject, Vector> rot = (o) =>
+            {
+                Vector vector = new Vector();
+                vector = o.CurrentVector;
+                vector.Direction = o.CurrentVector.NextDirection;
+                o.Set(vector);
+                //просто возвращаем текущий вектор объекта
+                return o.CurrentVector;
+            };
+            IoC<Func<UObject, Vector>>.Resolve("IoC.Registration", "rotate", rot);
+
             //Регистрация метода void Finish()
             Action<UObject> finish = (o) =>
             {
@@ -69,7 +81,22 @@ namespace HM2.Tests.AdapterTests
             Assert.AreEqual(12, posNow.PositionNow.X);
             Assert.AreEqual(5, posNow.PositionNow.Y);
         }
+        [Test]
+        public void RotateTest()
+        {
+            Vector vect = new Vector();
+            vect.PositionNow = new Coordinats { X = 0.0, Y = 20.0 };
+            vect.AngularVelosity = 10;
+            vect.Direction = 15;
+            vect.DirectionNumber = 24;
+            UObject obj = new UObject(vect);
+            IMovable movableAdapter = IoC<Func<UObject, IMovable>>.Resolve("UObjectAdapter").Invoke(obj);
 
+            //Вызываем метод разворота
+            movableAdapter.rotate();
+
+            Assert.AreEqual(movableAdapter.getPosition().Direction, 1);
+        }
         [Test]
         public void RegistrationSetVectorDependency()
         {
