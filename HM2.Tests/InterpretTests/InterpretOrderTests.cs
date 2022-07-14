@@ -4,9 +4,11 @@ using HM2.IoCs;
 using HM2.MovableObject;
 using HM2.Tests.AdapterTests;
 using NUnit.Framework;
+using Ships.Exceptions;
 using Ships.Interpret.Interfaces;
 using Ships.Interpret.Parse;
 using System;
+using System.Collections.Generic;
 
 namespace HM2.Tests.InterpretTests
 {
@@ -86,9 +88,9 @@ namespace HM2.Tests.InterpretTests
                                 }";
 
             //вызываем интерпретатор приказа, регистрирующий в IoC игровой объект из приказа
-           new GameObject(order).Interpret();
+            new GameObject(order).Interpret();
             //Вызываем интерпретатор приказа, регистрирующий команду из приказа
-           new CommandParse(order).Interpret();
+            new CommandParse(order).Interpret();
 
             //Получаем объект, указанный в приказе
             IMovable orderObj = IoC<IMovable>.Resolve("orderUObject");
@@ -144,7 +146,59 @@ namespace HM2.Tests.InterpretTests
             Assert.AreEqual(orderObj.getPosition().Direction, 1);
             Assert.AreEqual(orderObj.getPosition().DirectionNumber, 24);
         }
+        [Test]
+        public void UserRulesAllowedParseTest()
+        {
+            //список игровых объектов
+            List<string> gameObj = new List<string>
+            {
+                "548",
+                "145",
+                "200"
+            };
+            IoC<List<string>>.Resolve("Registration", "102", gameObj); //пользователь 102 может управлять игровыми объектами из списка
 
+            string order = @"{  user: 102,
+                                id: 548,
+                                action: rotate,
+                                params: (10, 15, 24)
+                                }";
+
+            new UserRulesParse(order).Interpret();
+            new GameObject(order).Interpret();
+            string user = IoC<string>.Resolve("orderUser");
+            IMovable obj = IoC<IMovable>.Resolve("orderUObject");
+            Assert.AreEqual(user, "102");
+        }
+        [Test]
+        public void UserRulesForbiddenParseTest()
+        {
+            //список игровых объектов
+            List<string> gameObj = new List<string>
+            {
+                "558",
+                "145",
+                "200"
+            };
+            IoC<List<string>>.Resolve("Registration", "102", gameObj); //пользователь 102 может управлять игровыми объектами из списка
+
+            string order = @"{  user: 102,
+                                id: 548,
+                                action: rotate,
+                                params: (10, 15, 24)
+                                }";
+
+            new UserRulesParse(order).Interpret();
+
+            try
+            {
+                new GameObject(order).Interpret();
+            }
+            catch (Exception ex)
+            {
+                Assert.AreEqual(ex.GetType().GetHashCode(), new NoRightsException().GetType().GetHashCode());
+            }
+
+        }
     }
 }
-                                                                                    

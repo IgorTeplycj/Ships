@@ -2,6 +2,7 @@
 using HM2.IoCs;
 using HM2.MovableObject;
 using Ships.Interpret.Interfaces;
+using Ships.Interpret.Parse.Commands;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -30,7 +31,11 @@ namespace Ships.Interpret.Parse
             string id = order.Substring(start, lengh).Trim().Trim(':').Trim(',').Trim();
 
             IMovable orderUbject = IoC<IMovable>.Resolve(id);
-            IoC<IMovable>.Resolve("Registration", "orderUObject", orderUbject); 
+            IoC<IMovable>.Resolve("Registration", "orderUObject", orderUbject);
+
+            //Проверка прав пользователя
+            new UserRulesParse(order).Interpret();
+            new CheckUserCommand(id, IoC<string>.Resolve("orderUser")).Execute();
         }
     }
 }
